@@ -31,4 +31,8 @@ app.use('/api/feedback', require('./routes/feedback'));
 app.use('/api/rss', require('./routes/rss'));
 app.use('/api', require('./routes/api'));
 
-app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
+if (require.main === module) {
+    app.listen(PORT, () => console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`));
+}
+
+module.exports = app;
