@@ -1,0 +1,284 @@
+<h1 id="layout-roadmap">Layout Roadmap</h1>
+<p>This document outlines structural, responsiveness, consistency, and
+UX gaps in the layout of the Pastoral Familiar website, benchmarks these
+against modern community/church design standards, and tracks their
+completion.</p>
+<hr />
+<h2 id="current-gaps-status">Current Gaps &amp; Status</h2>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 15%" />
+<col style="width: 21%" />
+<col style="width: 32%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Area</th>
+<th>Issue</th>
+<th>Severity</th>
+<th>Section/File</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Navigation</strong></td>
+<td>10 links wrap onto multiple lines/logo on screens between 768px (md)
+and 1024px (lg).</td>
+<td><strong>High</strong></td>
+<td><code>views/layout.ejs</code> (Header)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Navigation</strong></td>
+<td>Mobile menu dropdown is missing “Quiénes Somos” and “Misa en Vivo”
+links.</td>
+<td><strong>High</strong></td>
+<td><code>views/layout.ejs</code> (Header)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Navigation</strong></td>
+<td>Mobile menu lacks top padding/gutters, squishing menu links against
+header.</td>
+<td><strong>Medium</strong></td>
+<td><code>views/layout.ejs</code> (Header)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Hero Sections</strong></td>
+<td>Fixed hero heights (<code>h-[50vh]</code>, <code>h-[40vh]</code>)
+risk text overflow/truncation when zoomed or on small viewports.</td>
+<td><strong>Medium</strong></td>
+<td><code>index.ejs</code>, <code>retiro-de-parejas.ejs</code>,
+<code>inscripcion-*.ejs</code>, <code>quienes-somos.ejs</code>,
+<code>consejeria-matrimonial.ejs</code>, <code>evangelio.ejs</code>,
+<code>misa-en-vivo.ejs</code>, <code>recursos.ejs</code></td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Grids</strong></td>
+<td>Grids lack explicit mobile column definitions
+(<code>grid-cols-1</code>), relying on browser defaults.</td>
+<td><strong>Low</strong></td>
+<td><code>index.ejs</code>, <code>quienes-somos.ejs</code>,
+<code>consejeria-matrimonial.ejs</code>, <code>recursos.ejs</code></td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Content List</strong></td>
+<td>“Santo del Día” uses row flex (<code>flex items-start</code>) on
+mobile, squishing the circular icon container.</td>
+<td><strong>Medium</strong></td>
+<td><code>views/evangelio.ejs</code> (Santo Section)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Content List</strong></td>
+<td>Eucaristías list uses row flex (<code>flex justify-between</code>)
+without mobile wrap, causing overlapping text columns on small
+viewports.</td>
+<td><strong>Medium</strong></td>
+<td><code>views/misa-en-vivo.ejs</code> (Schedule)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Footer</strong></td>
+<td>Contact info columns list layout wraps email address awkwardly on
+narrow screens.</td>
+<td><strong>Low</strong></td>
+<td><code>views/layout.ejs</code> (Footer)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td>Section vertical padding fluctuates between <code>py-16</code>
+(64px), <code>py-12</code> (48px), and <code>py-8</code> (32px) without
+hierarchy.</td>
+<td><strong>Low</strong></td>
+<td>All views</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>Consistency</strong></td>
+<td><code>.badge</code> horizontal padding uses <code>0.625rem</code>
+(10px) and <code>@keyframes slideDown</code> uses
+<code>translateY(-10px)</code>, which deviate from the 4px scale.</td>
+<td><strong>Low</strong></td>
+<td><code>views/layout.ejs</code> (CSS Styles)</td>
+<td><strong>Fixed</strong></td>
+</tr>
+<tr>
+<td><strong>UX/Accessibility</strong></td>
+<td>Text link focus rings and skip-navigation links have inconsistent
+focus-visible offsets on focus states.</td>
+<td><strong>Low</strong></td>
+<td><code>views/layout.ejs</code></td>
+<td><strong>Fixed</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="benchmark-insights">Benchmark Insights</h2>
+<h3 id="bellevue-presbyterian-church-belpres.org">1. Bellevue
+Presbyterian Church (belpres.org)</h3>
+<ul>
+<li><strong>Pattern observed</strong>: The header layout uses a clean
+2-step navigation. It triggers its mobile toggle breakpoint at
+<code>1024px</code> instead of <code>768px</code>.</li>
+<li><strong>Why it works</strong>: By pushing the mobile menu breakpoint
+to <code>lg</code> (1024px), it ensures the navigation links never wrap
+or overlap the logo on tablet viewports.</li>
+<li><strong>How it applies</strong>: Applied to layout navigation
+header.</li>
+</ul>
+<h3 id="grace-church-grace.org">2. Grace Church (grace.org)</h3>
+<ul>
+<li><strong>Pattern observed</strong>: Responsive content tables and
+schedule listings collapse to vertical stacks on mobile, using unified
+gaps and clear card borders.</li>
+<li><strong>Why it works</strong>: Collapsing row listings into
+single-column vertical cards on mobile prevents horizontal scroll
+overflows and makes them easily readable.</li>
+<li><strong>How it applies</strong>: Applied to Santo del Día card
+structure and Eucaristías list items.</li>
+</ul>
+<h3 id="parish-of-st.-matthew-stmatthews.org">3. Parish of St. Matthew
+(stmatthews.org)</h3>
+<ul>
+<li><strong>Pattern observed</strong>: Forms and details lists are
+constrained to narrow layout containers for readability.</li>
+<li><strong>Why it works</strong>: A narrow form is significantly easier
+to scan and fill out on both desktop and mobile viewports.</li>
+<li><strong>How it applies</strong>: Applied to registration forms
+layout.</li>
+</ul>
+<hr />
+<h2 id="proposed-improvements-results">Proposed Improvements &amp;
+Results</h2>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 22%" />
+<col style="width: 16%" />
+<col style="width: 20%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Improvement</th>
+<th>Rationale</th>
+<th>Effort</th>
+<th>Priority</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Responsive Nav Header Breakpoint</strong></td>
+<td>Change nav show/hide and mobile toggle breakpoints from
+<code>md</code> (768px) to <code>lg</code> (1024px) to prevent wrapping
+links.</td>
+<td>Small</td>
+<td><strong>High</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Complete Mobile Menu links</strong></td>
+<td>Add missing “Quiénes Somos” and “Misa en Vivo” pages to the mobile
+menu list and add <code>pt-2</code> top spacing.</td>
+<td>Small</td>
+<td><strong>High</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Overflow-Safe Heroes</strong></td>
+<td>Convert fixed hero heights (<code>h-[40vh]</code>,
+<code>h-[50vh]</code>) to safe minimum height containers
+(<code>min-h-[40vh]</code>, <code>min-h-[50vh]</code>) with vertical
+padding.</td>
+<td>Small</td>
+<td><strong>High</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Eucaristías Responsive Wrap</strong></td>
+<td>Update list columns in <code>misa-en-vivo.ejs</code> to stack
+vertically (<code>flex-col</code>) on small screens and row-flex on
+<code>sm</code>.</td>
+<td>Small</td>
+<td><strong>Medium</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Santo del Día Responsive Stacking</strong></td>
+<td>Refactor Santo del día flex row to use
+<code>flex-col md:flex-row</code> and center align text/button on
+mobile.</td>
+<td>Small</td>
+<td><strong>Medium</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Explicit Grid Mobile Columns</strong></td>
+<td>Add explicit <code>grid-cols-1</code> to grids in all templates
+(<code>index.ejs</code>, <code>quienes-somos.ejs</code>, etc.) for
+robust cross-browser rendering.</td>
+<td>Small</td>
+<td><strong>Medium</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Section Spacing Standardization</strong></td>
+<td>Standardize vertical padding across sections using consistent
+spacing hierarchy (<code>py-16</code> / 64px for major,
+<code>py-8</code> / 32px for minor).</td>
+<td>Medium</td>
+<td><strong>Low</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+<tr>
+<td><strong>Standardize Custom CSS Spacing</strong></td>
+<td>Replace non-standard spacing properties (<code>0.625rem</code>,
+<code>-10px</code>) in layout CSS with standard 4px multiples
+(<code>0.75rem</code>, <code>-8px</code>).</td>
+<td>Small</td>
+<td><strong>Low</strong></td>
+<td><strong>Completed</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="completed-order-of-execution">Completed Order of Execution</h2>
+<ol type="1">
+<li><strong>Phase 1: Header Navigation &amp; Mobile Menu</strong>
+<ul>
+<li>Shifted breakpoint to <code>lg</code>.</li>
+<li>Added missing links (“Quiénes Somos”, “Misa en Vivo”) to the mobile
+menu list.</li>
+<li>Adjusted mobile menu container padding.</li>
+</ul></li>
+<li><strong>Phase 2: Hero Sections</strong>
+<ul>
+<li>Converted fixed <code>h-[X]</code> to <code>min-h-[X] py-12</code>
+across all views.</li>
+</ul></li>
+<li><strong>Phase 3: Content List Responsiveness</strong>
+<ul>
+<li>Refactored schedule lists in <code>misa-en-vivo.ejs</code> and Santo
+section in <code>evangelio.ejs</code>.</li>
+</ul></li>
+<li><strong>Phase 4: Grids &amp; Spacing Standardization</strong>
+<ul>
+<li>Added explicit <code>grid-cols-1</code> to all content grids.</li>
+<li>Standardized layout gutters and section standard paddings.</li>
+<li>Resolved CSS spacing variables.</li>
+</ul></li>
+<li><strong>Phase 5: Git Version Control</strong>
+<ul>
+<li>Initialized Git, committed all enhancements, and pushed tracking
+branch <code>main</code> to GitHub origin.</li>
+</ul></li>
+</ol>

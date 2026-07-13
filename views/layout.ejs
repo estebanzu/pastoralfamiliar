@@ -296,22 +296,29 @@
     </a>
 
     <!-- Header -->
-    <header class="bg-primary sticky top-0 z-40 header-blur">
-        <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+    <header class="bg-primary sticky top-0 z-40 header-blur flex flex-col">
+        <!-- Top Bar (Utility Navigation) -->
+        <div class="border-b border-white/10 hidden lg:block">
+            <div class="max-w-6xl mx-auto px-4 py-2 flex justify-end gap-6 text-xs font-medium text-white/80">
+                <a href="/quienes-somos" class="hover:text-white transition-colors duration-200 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Quiénes Somos</a>
+                <a href="/misa-en-vivo" class="hover:text-white transition-colors duration-200 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Misa en Vivo</a>
+                <a href="/evangelio" class="hover:text-white transition-colors duration-200 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Evangelio</a>
+                <a href="/recursos" class="hover:text-white transition-colors duration-200 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Recursos</a>
+                <a href="/contacto" class="hover:text-white transition-colors duration-200 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Contacto</a>
+            </div>
+        </div>
+        <!-- Main Navigation Bar -->
+        <nav class="max-w-6xl mx-auto w-full px-4 py-3 lg:py-4 flex justify-between items-center">
             <a href="/" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-lg">
                 <img src="/images/logo.jpg" alt="Pastoral Familiar" class="h-12 lg:h-16 rounded-full bg-white p-1">
             </a>
-            <ul class="hidden lg:flex gap-4 xl:gap-8 text-sm font-medium text-white/90">
+            <!-- Primary Desktop Nav -->
+            <ul class="hidden lg:flex gap-6 xl:gap-10 text-sm font-semibold text-white/95">
                 <li><a href="/" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Inicio</a></li>
-                <li><a href="/quienes-somos" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Quiénes Somos</a></li>
                 <li><a href="/retiro-de-parejas" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Campamento</a></li>
                 <li><a href="/escuela-para-padres" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Escuela</a></li>
                 <li><a href="/grupos-de-oracion" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Grupos</a></li>
                 <li><a href="/consejeria-matrimonial" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Consejería</a></li>
-                <li><a href="/misa-en-vivo" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Misa en Vivo</a></li>
-                <li><a href="/evangelio" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Evangelio</a></li>
-                <li><a href="/recursos" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Recursos</a></li>
-                <li><a href="/contacto" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Contacto</a></li>
             </ul>
             <!-- Mobile menu button -->
             <button id="menu-btn" class="lg:hidden text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
