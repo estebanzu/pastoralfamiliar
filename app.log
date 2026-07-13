@@ -1,0 +1,4 @@
+◇ injected env (2) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+🚀 Servidor corriendo en http://localhost:3000
+✓ Configuración cargada desde config.yaml

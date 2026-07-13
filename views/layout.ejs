@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof title !== 'undefined' ? title : 'Pastoral Familiar' %></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        accent: '#EAA922',
+                        'accent-hover': '#D69A1E',
+                        primary: '#1D70B8',
+                        'primary-hover': '#1A63A3',
+                        'primary-light': '#7BC1E8',
+                        'bg-light': '#FFFFFF',
+                        'bg-secondary': '#F4F8FA',
+                        'text-primary': '#1A1A1A',
+                        'text-secondary': '#555555',
+                    },
+                    fontFamily: {
+                        serif: ['Figtree', 'system-ui', 'sans-serif'],
+                        sans: ['Figtree', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+                        'slide-down': 'slideDown 0.25s ease-out forwards',
+                        'scale-in': 'scaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards',
+                        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-8px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Figtree', system-ui, sans-serif; }
+        .font-editorial { font-family: 'Figtree', system-ui, sans-serif; }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        /* Focus visible states for accessibility */
+        :focus-visible {
+            outline: 2px solid #1D70B8;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+        
+        /* Skip navigation link */
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            transition: top 0.2s ease-out;
+        }
+        .skip-link:focus {
+            top: 1rem;
+        }
+        
+        /* Gradient text animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #EAA922, #FFD700, #EAA922, #FFA500, #EAA922);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-flow 4s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-flow {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        
+        /* Button styles */
+        .btn {
+            transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn:hover {
+            transform: scale(1.02);
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        .btn-primary {
+            background-color: #1D70B8;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1A63A3;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .btn-accent {
+            background-color: #EAA922;
+            color: white;
+        }
+        .btn-accent:hover {
+            background-color: #D69A1E;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #1D70B8;
+            color: #1D70B8;
+        }
+        .btn-outline:hover {
+            background-color: #1D70B8;
+            color: white;
+        }
+        
+        /* Card styles */
+        .card {
+            transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Image card hover */
+        .image-card {
+            transition: all 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .image-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .image-card img {
+            transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Scroll animation base states */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .scroll-animate-delay-1 { transition-delay: 100ms; }
+        .scroll-animate-delay-2 { transition-delay: 200ms; }
+        .scroll-animate-delay-3 { transition-delay: 300ms; }
+        .scroll-animate-delay-4 { transition-delay: 400ms; }
+        .scroll-animate-delay-5 { transition-delay: 500ms; }
+        
+        /* Mobile menu animation */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease-out, opacity 0.25s ease-out;
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+        
+        /* Scroll progress bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #EAA922, #FFD700);
+            z-index: 100;
+            transition: width 100ms linear;
+        }
+        
+        /* Form input transitions */
+        .form-input {
+            transition: border-color 200ms ease-out, box-shadow 200ms ease-out;
+        }
+        .form-input:focus {
+            border-color: #1D70B8;
+            box-shadow: 0 0 0 3px rgba(29, 112, 184, 0.1);
+        }
+        
+        /* Badge styles */
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+        .badge-green {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+        .badge-amber {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        .badge-red {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background-color: #1A1A1A;
+            color: white;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            z-index: 50;
+        }
+        .tooltip:hover::after {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-4px);
+        }
+        
+        /* Header backdrop blur */
+        .header-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        
+        /* Typewriter cursor */
+        .typewriter-cursor::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            color: #EAA922;
+            font-weight: normal;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-bg-light text-text-primary min-h-screen flex flex-col">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" style="width: 0%"></div>
+
+    <!-- Skip Navigation -->
+    <a href="#main-content" class="skip-link bg-primary text-white px-4 py-2 rounded-lg font-medium">
+        Saltar al contenido principal
+    </a>
+
+    <!-- Header -->
+    <header class="bg-primary sticky top-0 z-40 header-blur">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="flex items-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-primary rounded-lg">
+                <img src="/images/logo.jpg" alt="Pastoral Familiar" class="h-12 lg:h-16 rounded-full bg-white p-1">
+            </a>
+            <ul class="hidden lg:flex gap-4 xl:gap-8 text-sm font-medium text-white/90">
+                <li><a href="/" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Inicio</a></li>
+                <li><a href="/quienes-somos" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Quiénes Somos</a></li>
+                <li><a href="/retiro-de-parejas" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Campamento</a></li>
+                <li><a href="/escuela-para-padres" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Escuela</a></li>
+                <li><a href="/grupos-de-oracion" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Grupos</a></li>
+                <li><a href="/consejeria-matrimonial" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Consejería</a></li>
+                <li><a href="/misa-en-vivo" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Misa en Vivo</a></li>
+                <li><a href="/evangelio" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Evangelio</a></li>
+                <li><a href="/recursos" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Recursos</a></li>
+                <li><a href="/contacto" class="hover:text-white transition-colors duration-200 py-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-white rounded">Contacto</a></li>
+            </ul>
+            <!-- Mobile menu button -->
+            <button id="menu-btn" class="lg:hidden text-white w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="lg:hidden px-4 pt-2 pb-4" role="menu">
+            <a href="/" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Inicio</a>
+            <a href="/quienes-somos" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Quiénes Somos</a>
+            <a href="/retiro-de-parejas" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Campamento</a>
+            <a href="/escuela-para-padres" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Escuela</a>
+            <a href="/grupos-de-oracion" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Grupos</a>
+            <a href="/consejeria-matrimonial" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Consejería</a>
+            <a href="/misa-en-vivo" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Misa en Vivo</a>
+            <a href="/evangelio" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Evangelio</a>
+            <a href="/recursos" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Recursos</a>
+            <a href="/contacto" class="block text-white/90 hover:text-white hover:bg-white/10 py-3 px-4 rounded-lg transition-colors duration-200" role="menuitem">Contacto</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="flex-1">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <%- body %>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-bg-secondary border-t border-primary-light/30 mt-16">
+        <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="font-serif text-xl font-bold mb-3 text-primary">Pastoral Familiar</h3>
+                <p class="text-text-secondary text-sm leading-relaxed">Fortaleciendo familias a través de la fe, el acompañamiento y la comunidad.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-sm uppercase tracking-wider text-text-secondary mb-3">Enlaces</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/retiro-de-parejas" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Campamento de Parejas</a></li>
+                    <li><a href="/escuela-para-padres" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Escuela para las Familias</a></li>
+                    <li><a href="/grupos-de-oracion" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Grupos de Oración</a></li>
+                    <li><a href="/consejeria-matrimonial" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Consejería Matrimonial</a></li>
+                    <li><a href="/evangelio" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Evangelio del Día</a></li>
+                    <li><a href="/recursos" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Recursos</a></li>
+                    <li><a href="/contacto" class="text-text-primary hover:text-primary transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">Contacto</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-sm uppercase tracking-wider text-text-secondary mb-3">Contacto</h4>
+                <ul class="space-y-2 text-sm">
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a href="tel:+50688830657" class="text-text-primary hover:text-primary transition-colors">+506 8883 0657</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        <a href="tel:+50683187140" class="text-text-primary hover:text-primary transition-colors">+506 8318 7140</a>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <a href="mailto:pastoral.familiar.concepcion@gmail.com" class="text-text-primary hover:text-primary transition-colors text-xs break-all">pastoral.familiar.concepcion@gmail.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-primary-light/20 py-4 text-center text-xs text-text-secondary">
+            &copy; <%= new Date().getFullYear() %> Pastoral Familiar. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Feedback Bubble -->
+    <%- include('partials/feedback-bubble') %>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle with animation
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        let menuOpen = false;
+        
+        menuBtn.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileMenu.classList.toggle('open', menuOpen);
+            menuBtn.setAttribute('aria-expanded', menuOpen);
+            
+            // Animate hamburger to X
+            if (menuOpen) {
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            } else {
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (menuOpen && !menuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                menuOpen = false;
+                mobileMenu.classList.remove('open');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        });
+        
+        // Scroll progress bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = progress + '%';
+        }, { passive: true });
+        
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Typewriter effect for verse
+        const typewriterElement = document.getElementById('typewriter');
+        const typewriterCite = document.getElementById('typewriter-cite');
+        if (typewriterElement) {
+            const text = '"El amor es paciente, es bondadoso..."';
+            let index = 0;
+            let hasStarted = false;
+            
+            const typewriterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasStarted) {
+                        hasStarted = true;
+                        typewriterElement.classList.add('typewriter-cursor');
+                        
+                        const typeInterval = setInterval(() => {
+                            if (index < text.length) {
+                                typewriterElement.textContent = text.substring(0, index + 1);
+                                index++;
+                            } else {
+                                clearInterval(typeInterval);
+                                setTimeout(() => {
+                                    typewriterElement.classList.remove('typewriter-cursor');
+                                    typewriterCite.style.opacity = '1';
+                                }, 500);
+                            }
+                        }, 80);
+                        
+                        typewriterObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            typewriterObserver.observe(typewriterElement);
+        }
+        
+        // Hero entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroElements = document.querySelectorAll('[data-hero-animate]');
+            heroElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 150);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!-- Hero -->
+<section class="relative bg-gradient-to-b from-primary to-bg-light py-16 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+        <p class="text-accent uppercase tracking-widest text-sm font-semibold mb-4" data-hero-animate>Palabra de Dios</p>
+        <h1 class="font-serif text-4xl md:text-6xl font-black text-white leading-tight mb-4" data-hero-animate>Evangelio del Día</h1>
+        <p class="text-white/80 text-lg max-w-2xl mx-auto" data-hero-animate>Escucha la Palabra de Dios a través de ACI Prensa.</p>
+    </div>
+</section>
+
+<!-- Contenido -->
+<section class="max-w-4xl mx-auto px-4 py-16">
+    <div class="grid gap-8">
+        <!-- Evangelio -->
+        <article class="bg-bg-secondary rounded-2xl p-8 shadow-sm scroll-animate" id="evangelio-section">
+            <div class="text-center mb-6">
+                <svg class="w-16 h-16 text-accent mx-auto animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+                <p class="text-text-secondary" id="evangelio-loading">Cargando evangelio del día...</p>
+            </div>
+            <div id="evangelio-content" class="prose prose-lg max-w-none hidden">
+                <h2 id="evangelio-title" class="font-serif text-2xl md:text-3xl font-bold text-primary mb-4"></h2>
+                <div id="evangelio-body" class="text-text-secondary leading-relaxed"></div>
+                <a id="evangelio-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-8 inline-block px-6 py-3 rounded-lg text-sm font-medium">
+                    Leer en ACI Prensa →
+                </a>
+            </div>
+        </article>
+
+        <!-- Santo del Día -->
+        <article class="bg-bg-secondary rounded-2xl p-8 shadow-sm scroll-animate scroll-animate-delay-1" id="santo-section">
+            <div class="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center">
+                        <svg class="w-10 h-10 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-accent uppercase tracking-widest text-xs font-bold mb-2">Santo del Día</p>
+                    <h2 id="santo-title" class="font-serif text-2xl font-bold text-primary mb-3">Cargando...</h2>
+                    <div id="santo-body" class="text-text-secondary leading-relaxed"></div>
+                    <a id="santo-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-accent mt-6 inline-block px-6 py-3 rounded-lg text-sm font-medium">
+                        Más sobre este santo →
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    await Promise.all([loadEvangelio(), loadSanto()]);
+});
+
+async function loadEvangelio() {
+    const section = document.getElementById('evangelio-section');
+    const loading = document.getElementById('evangelio-loading');
+    const content = document.getElementById('evangelio-content');
+    const title = document.getElementById('evangelio-title');
+    const body = document.getElementById('evangelio-body');
+    const link = document.getElementById('evangelio-link');
+
+    try {
+        const res = await fetch('/api/rss/evangelio');
+        const data = await res.json();
+        if (data.items && data.items.length > 0) {
+            const item = data.items[0];
+            title.textContent = item.title;
+            body.innerHTML = item.description || '<p>El evangelio del día está disponible en ACI Prensa.</p>';
+            link.href = item.link;
+            loading.classList.add('hidden');
+            content.classList.remove('hidden');
+        } else {
+            loading.textContent = 'No se encontró el evangelio de hoy.';
+        }
+    } catch (error) {
+        loading.innerHTML = 'Error al cargar el evangelio. <a href="https://www.aciprensa.com" target="_blank" class="text-primary hover:underline">Visitar ACI Prensa</a>';
+    }
+}
+
+async function loadSanto() {
+    const title = document.getElementById('santo-title');
+    const body = document.getElementById('santo-body');
+    const link = document.getElementById('santo-link');
+
+    try {
+        const res = await fetch('/api/rss/santos');
+        const data = await res.json();
+        if (data.items && data.items.length > 0) {
+            const item = data.items[0];
+            title.textContent = item.title;
+            body.innerHTML = item.description || '<p>Santo del día disponible en ACI Prensa.</p>';
+            link.href = item.link;
+        } else {
+            title.textContent = 'Santo del día no disponible';
+            body.textContent = 'Vuelve mañana para conocer al santo del día.';
+        }
+    } catch (error) {
+        title.textContent = 'Error al cargar';
+        body.innerHTML = '<a href="https://www.aciprensa.com" target="_blank" class="text-primary hover:underline">Visitar ACI Prensa</a>';
+    }
+}
+</script>

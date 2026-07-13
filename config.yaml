@@ -1,0 +1,194 @@
+# ============================================================
+# Configuración de Eventos - Pastoral Familiar
+# ============================================================
+# Edite este archivo para agregar nuevos eventos.
+# No es necesario modificar el código fuente.
+# ============================================================
+
+# ------------------------------------------------------------
+# Campamentos de Parejas
+# ------------------------------------------------------------
+campamentos:
+  - id: campamento-2026
+    titulo: "Campamento de Parejas 2026"
+    subtitulo: "En Manos de Dios"
+    descripcion: "Vive junto a tu pareja un espacio pensado para fortalecer su relación a través de la fe, el diálogo y la comunidad."
+    imagen: "/images/campamento-parejas.jpg"
+    precio: 45000
+    moneda: "₡"
+    incluye:
+      - "Alojamiento de 1 noche"
+      - "Todas las comidas"
+      - "Conferencias y talleres"
+      - "Materiales de trabajo"
+    horario: "Viernes a Domingo"
+    estado: "proximamente"  # proximamente | activo | finalizado
+    fechaInicio: null
+    fechaFin: null
+    lugar: "Por confirmar"
+    whatsappMensaje: "Hola, quisiera más información sobre el Campamento de Parejas 2026."
+    whatsappNumero: "50688830657"
+    destacado: true
+
+  - id: campamento-2027
+    titulo: "Campamento de Parejas 2027"
+    subtitulo: "Fortaleciendo Vínculos"
+    descripcion: "Una nueva edición del campamento para parejas que desean crecer juntos en fe y amor."
+    imagen: "/images/campamento-parejas.jpg"
+    precio: 50000
+    moneda: "₡"
+    incluye:
+      - "Alojamiento de 1 noche"
+      - "Todas las comidas"
+      - "Conferencias y talleres"
+      - "Materiales de trabajo"
+    horario: "Viernes a Domingo"
+    estado: "proximamente"
+    fechaInicio: null
+    fechaFin: null
+    lugar: "Por confirmar"
+    whatsappMensaje: "Hola, quisiera más información sobre el Campamento de Parejas 2027."
+    whatsappNumero: "50688830657"
+    destacado: false
+
+# ------------------------------------------------------------
+# Catequesis
+# ------------------------------------------------------------
+catequesis:
+  - id: catequesis-prematrimonial-2026
+    titulo: "Catequesis Prematrimonial"
+    subtitulo: "Preparación para el Sacramento del Matrimonio"
+    descripcion: "Curso de preparación para parejas que desean contraer matrimonio católico. 12 módulos que cubren todos los aspectos de la vida matrimonial."
+    modulos: 12
+    duracion: "3 meses"
+    requisitos:
+      - "Asistencia obligatoria a todas las sesiones"
+      - "Certificado de bautismo (no mayor a 6 meses)"
+      - "Constancia de estado civil"
+    temas:
+      - "El Sacramento del Matrimonio"
+      - "Comunicación en la pareja"
+      - "Planificación familiar natural"
+      - "Sexualidad y amor"
+      - "Resolución de conflictos"
+      - "Fe y espiritualidad en el matrimonio"
+    estado: "activo"
+    fechaInicio: "2026-02-01"
+    fechaFin: "2026-04-30"
+    horario: "Sábados 9:00am - 11:00am"
+    lugar: "Parroquia Inmaculada Concepción"
+    whatsappMensaje: "Hola, quisiera más información sobre la Catequesis Prematrimonial."
+    whatsappNumero: "50688830657"
+    destacado: true
+
+  - id: catequesis-ninos-2026
+    titulo: "Catequesis para Niños"
+    subtitulo: "Formación en la fe para los más pequeños"
+    descripcion: "Espacio dedicado a la formación religiosa de los niños de la parroquia."
+    modulos: 20
+    duracion: "10 meses"
+    requisitos:
+      - "Edad: 6 a 12 años"
+      - "Asistencia regular"
+    temas:
+      - "Historias bíblicas"
+      - "Sakramentos"
+      - "Oración"
+      - "Valores cristianos"
+    estado: "activo"
+    fechaInicio: "2026-03-01"
+    fechaFin: "2026-12-15"
+    horario: "Domingos 10:00am - 11:30am"
+    lugar: "Parroquia Inmaculada Concepción"
+    whatsappMensaje: "Hola, quisiera inscribir a mi hijo/a en la Catequesis para Niños."
+    whatsappNumero: "50688830657"
+    destacado: false
+
+# ------------------------------------------------------------
+# Escuela para Padres
+# ------------------------------------------------------------
+escuela:
+  - id: escuela-familias-2026
+    titulo: "Escuela para las Familias"
+    subtitulo: "Formación para padres y madres de familia"
+    descripcion: "Espacio de formación y acompañamiento para padres que desean fortalecer su rol como educadores en la fe."
+    gratuito: true
+    estado: "activo"
+    horario: "Viernes 7:00pm - 9:00pm"
+    lugar: "Parroquia Inmaculada Concepción"
+    whatsappMensaje: "Hola, me interesa la Escuela para las Familias. Quisiera más información."
+    whatsappNumero: "50688830657"
+    destacado: true
+
+# ------------------------------------------------------------
+# Grupos de Oración
+# ------------------------------------------------------------
+gruposOracion:
+  - id: grupo-oracion-principal
+    titulo: "Grupo de Oración Principal"
+    descripcion: "Nos reunimos semanalmente para orar juntos por las familias de nuestra parroquia y comunidad."
+    horario: "Viernes 7:00pm"
+    lugar: "Parroquia Inmaculada Concepción"
+    whatsappMensaje: "Hola, quisiera más información sobre los Grupos de Oración."
+    whatsappNumero: "50688830657"
+    destacado: true
+
+# ------------------------------------------------------------
+# Consejería Matrimonial
+# ------------------------------------------------------------
+consejeria:
+  - id: consejeria-matrimonial
+    titulo: "Consejería Matrimonial"
+    descripcion: "Acompañamiento profesional para parejas que desean fortalecer su relación."
+    consejeros:
+      - nombre: "Lilliam y Fernando"
+        rol: "Consejeros Matrimoniales"
+        whatsapp: "50688830657"
+      - nombre: "Alvaro y Marta"
+        rol: "Consejeros Matrimoniales"
+        whatsapp: "50688830657"
+      - nombre: "Edwin y Elisa"
+        rol: "Consejeros Matrimoniales"
+        whatsapp: "50688830657"
+      - nombre: "Johnny y Esposa"
+        rol: "Consejeros Matrimoniales"
+        whatsapp: "50688830657"
+    whatsappMensaje: "Hola, quisiera agendar una cita de consejería matrimonial."
+    whatsappNumero: "50688830657"
+    calLink: "pastoral-familiar/consejeria-matrimonial"
+    destacado: true
+
+# ------------------------------------------------------------
+# Contactos
+# ------------------------------------------------------------
+contactos:
+  principal:
+    nombre: "Lilliam Mora"
+    rol: "Coordinadora Principal"
+    telefono: "+506 8883 0657"
+    whatsapp: "50688830657"
+  secundario:
+    nombre: "Johnny Fernández"
+    rol: "Coordinador"
+    telefono: "+506 8318 7140"
+    whatsapp: "50683187140"
+  parroquia:
+    nombre: "Parroquia Inmaculada Concepción"
+    telefono: "2279 5760"
+    direccion: "Concepción de La Unión, Cartago, Costa Rica"
+    googleMaps: "https://maps.app.goo.gl/DX6UPs6tpziffXGy9"
+    horario: "Siempre Abierto"
+
+# ------------------------------------------------------------
+# Información de la Pastoral
+# ------------------------------------------------------------
+pastoral:
+  nombre: "Pastoral Familiar"
+  parroquia: "Parroquia Concepción La Unión"
+  ubicacion: "Concepción de La Unión, Cartago, Costa Rica"
+  fundacion: "Hace más de 20 años"
+  reunion: "Viernes 7:00pm"
+  email: "pastoral.familiar.concepcion@gmail.com"
+  facebook:
+    grupo: "https://www.facebook.com/groups/128867420546228/"
+    pagina: "https://www.facebook.com/parroquiaconcepcionlaunion"
